@@ -11,6 +11,8 @@ app.get('/', (req, res) => {
     res.json({mess: "123"});
 });
 
-app.listen(3000, () => {
-    console.log('port 3000');
+var port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+    console.log('port ' + port);
 });
