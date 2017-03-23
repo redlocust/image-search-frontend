@@ -1,18 +1,23 @@
-
 var express = require('express');
-var path = require('path');
-
 var app = express();
+var path = require('path');
+var mongoose = require('mongoose');
 
-app.use(express.static(path.join(__dirname, 'public')));
+var apiRouter = require('./app_api/routers/index');
 
-app.get('/', (req, res) => {
-    //res.send('index.html');
-    res.json({mess: "123"});
+app.use(express.static(path.join(__dirname, '/public')));
+app.use('/api', express.static(path.join(__dirname, '/app_api')));
+
+app.use('/api', apiRouter);
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-    console.log('port ' + port);
+    console.log('Server started on port: ' + port);
 });

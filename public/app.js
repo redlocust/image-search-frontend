@@ -5,34 +5,21 @@ var ImageSearchApp = React.createClass({
     },
 
     componentDidMount() {
-        console.log('Mount');
-
-    },
-
-    chooseRandomImg: function () {
-        var randomNumber = Math.floor(Math.random() * this.state.data.length);
-        var selectedImg = this.state.data[randomNumber];
-        this.setState({selectedImg: selectedImg.content.rendered});
     },
 
     onBeginSearch: function (e) {
         e.preventDefault();
-        console.log('Query');
-        axios.get(`https://image-search-microservice-redlocust.c9users.io/imagesearch/${this.refs.query.value}?offset=2`)
+        axios.get(`http://localhost:3000/api/${this.refs.query.value}?offset=2`)
             .then((response) => {
-                //console.dir(response.data[0].url);
                 var urlsArray = response.data;
                 this.setState({imgUrls: urlsArray});
-                console.log(this.state);
             })
             .catch((error) => {
-                console.log(error);
             });
     },
 
 
     render: function () {
-        console.log('Hello');
 
         var imgList = [];
 
@@ -67,7 +54,7 @@ var ImageSearchApp = React.createClass({
 });
 
 ReactDOM.render(
-    <ImageSearchApp search='funny cat'/>
+    <ImageSearchApp />
     ,
     document.getElementById('content')
 );

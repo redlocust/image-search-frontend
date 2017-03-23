@@ -1,38 +1,11 @@
-var express = require('express'),
-    app = express(),
-    path = require('path'),
-    request = require('request'),
-    imagesearchRouter = express.Router(),
-    latestRouter = express.Router(),
-    mongoose = require('mongoose');
+var express = require("express");
+var request = require('request');
 
-mongoose.connect('mongodb://localhost:27017/imagesearch');
+var router = express.Router();
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log("we connected");
-});
+var Query = require('../models/db');
 
-var querySchema = mongoose.Schema({
-    term: String,
-    when: String
-});
-
-
-var Query = mongoose.model('Query', querySchema);
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
-app.get('/', function (req, res, next) {
-    res.sendFile(path.join(__dirname + '/index.html'));
-});
-
-latestRouter.use(function (req, res, next) {
+router.use(function (req, res, next) {
     console.log(req.method, req.url);
     next();
 });
@@ -40,12 +13,10 @@ latestRouter.use(function (req, res, next) {
 ///////
 //  Create page with latest queries
 //////
-latestRouter.get('/imagesearch', function(req, res) {
+router.get('/latest', (req, res) => {
 
-    Query.find({},null,{sort: '-when'}, function (err, records) {
-        if (err) {return console(err.log)}
-
-        //TODO: need reverse record fron new to old
+    Query.find({}, null, {sort: '-when'}, (err, records) => {
+        if (err) {res.json({error: err.log})}
 
         var numberRecords = (records.length > 10) ? (10)  : records.length;
 
@@ -59,36 +30,18 @@ latestRouter.get('/imagesearch', function(req, res) {
             arr.push(obj);
         }
 
-        res.contentType('application/json');
-        res.send(JSON.stringify(arr));
-
+        res.json(arr);
     });
-
 });
 
 
-imagesearchRouter.use(function (req, res, next) {
-    console.log(req.method, req.url);
-    next();
-});
+router.get('/:imageQuery', function (req, res, next) {
 
-imagesearchRouter.get('/', function (req, res, next) {
-    res.send('imagesearch base URL');
-});
-
-imagesearchRouter.get('/:imageQuery', function (req, res, next) {
-
-    //console.dir(req);
     var offset = req.query.offset;
     var startImageInterval = (offset - 1) * (10);
     var endImageInterval = (offset) * (10);
 
     var url = 'https://www.googleapis.com/customsearch/v1?q='+ req.params.imageQuery +'&cx=009450657259060162830%3Az9mqnzccxpi&searchType=image&lowRange='+ startImageInterval + '&key=AIzaSyCGsdsSaRofXRsQzrMn5S1QRw0rCh9lUfU';
-
-
-
-
-    // TODO: remove 3 party's module 'request'
 
     request({
         url: url,
@@ -105,13 +58,6 @@ imagesearchRouter.get('/:imageQuery', function (req, res, next) {
     });
 
 });
-
-app.use("/imagesearch", imagesearchRouter);
-app.use("/latest", latestRouter);
-
-app.listen(4000);
-console.log("Server start on http://localhost:4000");
-
 
 function parseJSON (json) {
     var arr = [];
@@ -143,3 +89,6 @@ function recordQueryToDB(query) {
         console.log('we save: ' + query);
     });
 }
+
+
+module.exports = router;
