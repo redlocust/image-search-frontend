@@ -3,7 +3,7 @@ var app = express();
 var path = require('path');
 var mongoose = require('mongoose');
 
-var apiRouter = require('./app_api/routers/index');
+var apiRouter = require('./app_api/routes/main');
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/api', express.static(path.join(__dirname, '/app_api')));

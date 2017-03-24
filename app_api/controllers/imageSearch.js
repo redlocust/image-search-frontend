@@ -1,20 +1,7 @@
-var express = require("express");
+var Query = require('../models/db');
 var request = require('request');
 
-var router = express.Router();
-
-var Query = require('../models/db');
-
-router.use(function (req, res, next) {
-    console.log(req.method, req.url);
-    next();
-});
-
-///////
-//  Create page with latest queries
-//////
-router.get('/latest', (req, res) => {
-
+module.exports.getLatestQuery = (req, res) => {
     Query.find({}, null, {sort: '-when'}, (err, records) => {
         if (err) {res.json({error: err.log})}
 
@@ -32,10 +19,9 @@ router.get('/latest', (req, res) => {
 
         res.json(arr);
     });
-});
+};
 
-
-router.get('/:imageQuery', function (req, res, next) {
+module.exports.getImageQuery = (req, res) => {
 
     var offset = req.query.offset;
     var startImageInterval = (offset - 1) * (10);
@@ -56,8 +42,8 @@ router.get('/:imageQuery', function (req, res, next) {
 
         }
     });
+};
 
-});
 
 function parseJSON (json) {
     var arr = [];
@@ -89,6 +75,3 @@ function recordQueryToDB(query) {
         console.log('we save: ' + query);
     });
 }
-
-
-module.exports = router;
