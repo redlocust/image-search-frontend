@@ -36,8 +36,8 @@ module.exports.getImageQuery = (req, res) => {
 
         if (!error && response.statusCode === 200) {
             var json = parseJSON(body, offset);
-            res.contentType('application/json');
-            res.send(json);
+            res.json(json);
+
             recordQueryToDB(req.params.imageQuery);
 
         }
@@ -60,7 +60,7 @@ function parseJSON (json) {
         arr.push(obj);
     });
 
-    return JSON.stringify(arr);
+    return arr;
 }
 
 
