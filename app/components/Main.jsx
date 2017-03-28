@@ -1,7 +1,9 @@
+var axios = require('axios');
+
 var ImageSearchApp = React.createClass({
 
     getInitialState: function () {
-        return {imgUrls: ["https://s5o.ru/storage/simple/ru/edt/68/88/80/66/ruee18dc5adcd.jpg"]};
+        return {imgUrls: [{url:"https://s5o.ru/storage/simple/ru/edt/68/88/80/66/ruee18dc5adcd.jpg"}]};
     },
 
     componentDidMount() {
@@ -32,15 +34,15 @@ var ImageSearchApp = React.createClass({
         });
 
         return (
-            <div>
-                <div>
+            <div className="container">
+                <div className="row">
                     <form action="">
                         <input type="text" placeholder="Search query" ref="query"/>
                         <button onClick={this.onBeginSearch}>Search</button>
                     </form>
                 </div>
 
-                < div >
+                < div className="row">
                     < p > Hello react </p>
                     <div className="container">
                         <div className="row fix">
@@ -52,9 +54,3 @@ var ImageSearchApp = React.createClass({
         );
     }
 });
-
-ReactDOM.render(
-    <ImageSearchApp />
-    ,
-    document.getElementById('content')
-);
