@@ -8,3 +8,6 @@ ReactDOM.render(
     ,
     document.getElementById('content')
 );
+
+
+//TODO Add description string 'Loading', when load images from server

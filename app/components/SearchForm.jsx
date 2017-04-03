@@ -11,6 +11,7 @@ var SearchForm = React.createClass({
                 this.props.onSearch(urlsArray);
             })
             .catch((error) => {
+
             });
     },
 
