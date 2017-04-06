@@ -1,30 +1,26 @@
 var React = require('react');
 
 var ImageList = React.createClass({
-    render: function () {
+  render: function () {
 
-        var imgList = [];
+    var imgList = [];
 
-        this.props.imgUrls.forEach((elem) => {
-            imgList.push(
-                <div className="col-xs-3">
-                    <img src={elem.url} className="img-responsive"/>
-                </div>
-            );
-        });
+    this.props.imgUrls.forEach((elem) => {
+      imgList.push(
+        <div className="column">
+          <img className="thumbnail" src={elem.url}/>
+          <h5>My Site</h5>
+        </div>
+      );
+    });
 
+    return (
+      <div className="row small-up-2 medium-up-3 large-up-4">
+        {imgList}
+      </div>
+    );
 
-        console.log(imgList);
-
-        return (
-            <div className="container">
-                <div className="row">
-                {imgList}
-                </div>
-            </div>
-        );
-
-    }
+  }
 });
 
 module.exports = ImageList;

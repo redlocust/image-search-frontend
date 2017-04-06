@@ -1,7 +1,7 @@
 var React = require('react');
 
-var SearchForm = require('./SearchForm.jsx');
-var ImageList = require('./ImageList.jsx');
+var SearchForm = require('SearchForm');
+var ImageList = require('ImageList');
 
 var Main = React.createClass({
 
