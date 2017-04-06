@@ -1,11 +1,13 @@
 var React = require('react');
 var axios = require('axios');
 
+var port = process.env.PORT || 3000;
+
 var SearchForm = React.createClass({
 
   onBeginSearch: function (e) {
     e.preventDefault();
-    axios.get(`http://localhost:3000/api/${this.refs.query.value}?offset=2`)
+    axios.get(`http://localhost:${port}/api/${this.refs.query.value}?offset=2`)
       .then((response) => {
         var urlsArray = response.data;
         this.props.onSearch(urlsArray);
