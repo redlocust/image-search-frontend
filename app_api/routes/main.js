@@ -9,7 +9,7 @@ router.use(function (req, res, next) {
     next();
 });
 
-//router.get('/latest', imageSearch.getLatestQuery);
+router.get('/latest', imageSearch.getLatestQuery);
 router.get('/:imageQuery', imageSearch.getImageQuery);
 
 module.exports = router;

@@ -1,25 +1,25 @@
-//var Query = require('../models/db');
+var Query = require('../models/db');
 var request = require('request');
 
-// module.exports.getLatestQuery = (req, res) => {
-//     Query.find({}, null, {sort: '-when'}, (err, records) => {
-//         if (err) {res.json({error: err.log})}
-//
-//         var numberRecords = (records.length > 10) ? (10)  : records.length;
-//
-//         var arr = [];
-//
-//         for(var i = 0, j = numberRecords; i < j; i++ ) {
-//
-//             var obj = {};
-//             obj.term = records[i].term;
-//             obj.when = records[i].when;
-//             arr.push(obj);
-//         }
-//
-//         res.json(arr);
-//     });
-// };
+module.exports.getLatestQuery = (req, res) => {
+    Query.find({}, null, {sort: '-when'}, (err, records) => {
+        if (err) {res.json({error: err.log})}
+
+        var numberRecords = (records.length > 10) ? (10)  : records.length;
+
+        var arr = [];
+
+        for(var i = 0, j = numberRecords; i < j; i++ ) {
+
+            var obj = {};
+            obj.term = records[i].term;
+            obj.when = records[i].when;
+            arr.push(obj);
+        }
+
+        res.json(arr);
+    });
+};
 
 module.exports.getImageQuery = (req, res) => {
 
@@ -38,7 +38,7 @@ module.exports.getImageQuery = (req, res) => {
             var json = parseJSON(body, offset);
             res.json(json);
 
-            //recordQueryToDB(req.params.imageQuery);
+            recordQueryToDB(req.params.imageQuery);
 
         }
     });
