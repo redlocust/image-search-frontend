@@ -7,7 +7,7 @@ var SearchForm = React.createClass({
 
   onBeginSearch: function (e) {
     e.preventDefault();
-    console.log(port);
+    console.log(process.env.PORT);
     axios.get(`//localhost:${port}/api/${this.refs.query.value}?offset=2`)
       .then((response) => {
         var urlsArray = response.data;
