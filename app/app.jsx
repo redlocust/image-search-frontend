@@ -16,3 +16,6 @@ ReactDOM.render(
 );
 
 //TODO Add description string 'Loading', when load images from server
+//TODO Enhance visual style with Foundation
+//TODO Add tests for backend part
+//TODO Add tests for frontend part
