@@ -19,3 +19,5 @@ ReactDOM.render(
 //TODO Enhance visual style with Foundation
 //TODO Add tests for backend part
 //TODO Add tests for frontend part
+//TODO Not work mobile version
+//TODO Add magnifying on image

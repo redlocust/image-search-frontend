@@ -9,8 +9,6 @@ var SearchForm = React.createClass({
     e.preventDefault();
     var hostAndPort = window.location.origin;
 
-    //console.log(`${hostAndPort}/api/${this.refs.query.value}?offset=2`);
-
     axios.get(`${hostAndPort}/api/${this.refs.query.value}?offset=2`)
       .then((response) => {
         var urlsArray = response.data;
