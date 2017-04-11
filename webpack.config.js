@@ -31,6 +31,7 @@ module.exports = {
       ImageList: path.resolve(__dirname, './app/components/ImageList.jsx'),
       SearchForm: path.resolve(__dirname, './app/components/SearchForm.jsx'),
       NewMain: path.resolve(__dirname, './app/components/NewMain.jsx'),
+      StatusString: path.resolve(__dirname, './app/components/StatusString.jsx'),
       applicationStyles: path.resolve(__dirname, './app/styles/app.scss')
     }
   },

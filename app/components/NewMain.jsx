@@ -6,19 +6,23 @@ var ImageList = require('ImageList');
 var NewMain = React.createClass({
 
   getInitialState: function () {
-    return {imgUrls: [{url: "https://s5o.ru/storage/simple/ru/edt/68/88/80/66/ruee18dc5adcd.jpg"}]};
+    return {
+      imgUrls: [{url: "https://s5o.ru/storage/simple/ru/edt/68/88/80/66/ruee18dc5adcd.jpg"}],
+    };
   },
 
   componentDidMount() {
   },
 
   handleClick: function (urlsArray) {
-    this.setState({imgUrls: urlsArray});
+    this.setState({
+      imgUrls: urlsArray,
+    });
   },
 
   render: function () {
 
-    var imgUrls = this.state.imgUrls;
+    var {imgUrls, statusString} = this.state;
 
     return (
       <div className="off-canvas-wrapper">
