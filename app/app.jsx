@@ -15,9 +15,9 @@ ReactDOM.render(
     document.getElementById('content')
 );
 
-//TODO Add description string 'Loading', when load images from server
-//TODO Enhance visual style with Foundation
-//TODO Add tests for backend part
-//TODO Add tests for frontend part
-//TODO Not work mobile version
-//TODO Add magnifying on image
+// TODO Add description string 'Loading', when load images from server
+// TODO Enhance visual style with Foundation
+// TODO Add tests for backend part
+// TODO Add tests for frontend part
+// TODO Not work mobile version
+// TODO Add magnifying on image
